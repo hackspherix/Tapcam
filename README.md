@@ -1,2 +1,2 @@
 # Tapcam
-Hack for android web camera not working for all os etc. only work for android web camera hacking 
+Hack for android web camera not working for all OS only work for android web camera hacking 
