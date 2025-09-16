@@ -6,7 +6,7 @@ Hack for android web camera not working for all OS only work for android web cam
 
 ![Image](https://github.com/user-attachments/assets/c2750226-3baa-4145-b3eb-d1a99c34b350)
 
-<h2 style="color: #red;">Installation (termux/linux)https
+<h2 style="color: #red;">Installation (termux/linux)</h2>
 
 ```
 https://github.com/hackspherix/Tapcam.git
